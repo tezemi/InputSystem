@@ -1,6 +1,6 @@
 {% metadata_file .yamato/config.metadata %}
 ---
-{% for editor in test_editors %}
+{% for editor in editors %}
 generate_code_coverage_windows_{{ editor.version }}:
   name: Generate Code Coverage Report(Windows) on {{ editor.version }}
   agent:
