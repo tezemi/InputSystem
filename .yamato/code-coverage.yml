@@ -1,15 +1,15 @@
 {% metadata_file .yamato/config.metadata %}
 ---
 {% for editor in editors %}
-generate_code_coverage_windows_{{ editor.version }}:
-  name: Generate Code Coverage Report(Windows) on {{ editor.version }}
+generate_code_coverage_windows_2019.3:
+  name: Generate Code Coverage Report(Windows) on 2019.3
   agent:
     type: Unity::VM
     image: package-ci/win10:stable
     flavor: b1.large
   commands:
     - npm install upm-ci-utils@stable -g --registry https://api.bintray.com/npm/unity/unity-npm
-    - upm-ci project test -u {{ editor.version }} --enable-code-coverage --code-coverage-options 'enableCyclomaticComplexity;generateHtmlReport;assemblyFilters:+Unity.Localization,+Unity.Localization.Editor'
+    - upm-ci project test -u 2019.3 --enable-code-coverage --code-coverage-options 'enableCyclomaticComplexity;generateHtmlReport;assemblyFilters:+UnityEngine.InputSystem'
   artifacts:
     logs:
       paths:
