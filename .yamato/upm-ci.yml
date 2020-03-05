@@ -1,39 +1,19 @@
-editors:
-  - version: 2019.1
-platforms:
-  - name: win
-    type: Unity::VM
-    image: package-ci/win10:latest
-    flavor: b1.large
-  - name: win_standalone
-    type: Unity::VM
-    image: package-ci/win10:latest
-    flavor: b1.large
-    runtime: StandaloneWindows64
-  - name: win_standalone_il2cpp
-    type: Unity::VM
-    image: package-ci/win10:latest
-    flavor: b1.large
-    runtime: StandaloneWindows64
-    scripting-backend: Il2Cpp
-    installscript: c:\python27\Scripts\unity-downloader-cli.exe -c editor -c StandaloneSupport-IL2CPP -w -u 
-  - name: mac
-    type: Unity::VM::osx
-    image: buildfarm/mac:stable
-    flavor: m1.mac
-  - name: mac_standalone
-    type: Unity::VM::osx
-    image: buildfarm/mac:stable
-    flavor: m1.mac
-    runtime: StandaloneOSX
-  - name: mac_standalone_il2cpp
-    type: Unity::VM::osx
-    image: buildfarm/mac:stable
-    flavor: m1.mac
-    runtime: StandaloneOSX   
-    scripting-backend: Il2Cpp 
-    installscript: ~/Library/Python/2.7/bin/unity-downloader-cli -c editor -c StandaloneSupport-IL2CPP -w -u 
+{% metadata_file .yamato/config.metadata %}
 ---
+pack:
+  name: Pack
+  agent:
+    type: Unity::VM
+    image: package-ci/win10:stable
+    flavor: b1.large
+  commands:
+    - npm install upm-ci-utils@stable -g --registry https://api.bintray.com/npm/unity/unity-npm
+    - upm-ci package pack --package-path Packages/com.unity.inputsystem
+  artifacts:
+    packages:
+      paths:
+        - "upm-ci~/**/*"
+
 {% for editor in editors %}
 {% for platform in platforms %}
 {{ platform.name }}_{{ editor.version }}:
