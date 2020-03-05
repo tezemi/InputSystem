@@ -1,6 +1,5 @@
 {% metadata_file .yamato/config.metadata %}
 ---
-{% for editor in editors %}
 generate_code_coverage_windows_2019.3:
   name: Generate Code Coverage Report(Windows) on 2019.3
   agent:
@@ -16,4 +15,3 @@ generate_code_coverage_windows_2019.3:
         - "upm-ci~/test-results/**/*"
   dependencies:
     - .yamato/upm-ci.yml#pack
-{% endfor %}
