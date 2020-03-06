@@ -17,5 +17,3 @@ generate_code_coverage_windows_2019.3:
     logs:
       paths:
         - "upm-ci~/test-results/**/*"
-  dependencies:
-    - .yamato/upm-ci.yml#pack
